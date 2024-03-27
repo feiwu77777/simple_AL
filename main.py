@@ -17,7 +17,6 @@ from model_v3 import MC_DeepLab
 from model_v4 import create_ViT_model
 from create_dataset import (
     get_datasets,
-    get_dataset_variables,
     get_image_curr_labeled,
 )
 from routes import (
@@ -605,27 +604,6 @@ def main():
     if os.path.isfile(PRINT_PATH):
         os.remove(PRINT_PATH)
 
-    ## setup configuration depending on the dataset
-    img_path, lab_path, data_path, class_id_type, frame_keyword, img_size, divide_data, num_train_val, zfill_nb = get_dataset_variables(config)
-    PIXEL_PER_IMG = img_size['IMG_SIZE'] ** 2 if 'IMG_SIZE2' not in img_size else img_size['IMG_SIZE'] * img_size['IMG_SIZE2']
-
-    ### create save dir for continuing round training
-    SAVE_CONTINUE_SEED_FOLDER = "/storage/workspaces/artorg_aimi/ws_00000/fei/continue_rounds/"
-    
-    [dataset_name, version, sampling_method] = config["EXP_NAME"].split("/")
-    if dataset_name != config["DATASET"]:
-        dataset_name = config["DATASET"]
-    if sampling_method[len("AL_") :] != config["SAMPLING"]:
-        sampling_method = "AL_" + config["SAMPLING"]
-    config["EXP_NAME"] = f"{dataset_name}/{version}/{sampling_method}"
-
-    SAVE_CONTINUE_SEED_FOLDER += config["EXP_NAME"]
-    if not os.path.exists(SAVE_CONTINUE_SEED_FOLDER) and config["NUM_ROUND"] > 1 and config["SAVE_CONTINUE_ROUND"]:
-        with open(PRINT_PATH, "a") as f:
-            f.write(f"saving continue weight at: {SAVE_CONTINUE_SEED_FOLDER}\n")
-        os.makedirs(SAVE_CONTINUE_SEED_FOLDER)
-    #############################
-
     if not os.path.exists(CONTINUE_FOLDER):
         os.mkdir(CONTINUE_FOLDER)
 
@@ -881,19 +859,6 @@ def main():
                 copy_model.load_state_dict(
                     torch.load(CONTINUE_FOLDER + f"best_val.pth")
                 )
-
-                ### SAVE CONTINUE SEED DICT ###
-                if config["NUM_ROUND"] > 1 and config["SAVE_CONTINUE_ROUND"]:
-                    state = {
-                        "best_val": copy_model.state_dict(),
-                        "curr_labeled": curr_labeled,
-                        "round": n_round,
-                        "seed": SEED,
-                    }
-                    torch.save(
-                        state,
-                        f"{SAVE_CONTINUE_SEED_FOLDER}/continue_rounds_SEED={SEED}.pth",
-                    )
 
                 ### test evaluation ###
                 _, test_score, test_class_dices = validate_v2(

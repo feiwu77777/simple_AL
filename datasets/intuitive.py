@@ -12,7 +12,6 @@ from torchvision import transforms as T
 import json
 import glob
 from config import img_size_intuitive as img_size
-from utils import pad_superpixel
 import pickle
 from config import config
 

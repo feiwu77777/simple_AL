@@ -10,7 +10,6 @@ from PIL import Image
 from torchvision import transforms as T
 import json
 from config import img_size_youtube as img_size
-from utils import pad_superpixel
 
 PETS_CLASS_TO_NB = {
     'background': 0,

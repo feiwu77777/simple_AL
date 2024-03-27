@@ -9,7 +9,6 @@ import torch
 from PIL import Image
 import json
 from torchvision import transforms as T
-from utils import pad_superpixel
 
 class A2D2ColorTransformer:
   def __init__(self, color_table):

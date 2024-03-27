@@ -8,7 +8,6 @@ import numpy as np
 import torch
 from PIL import Image
 from torchvision import transforms as T
-from utils import pad_superpixel
 from collections import namedtuple
 import pickle
 from config import config

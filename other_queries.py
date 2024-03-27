@@ -6,14 +6,10 @@ import json
 import os
 from sklearn.cluster import KMeans
 import torch.nn.functional as F
-from custom_Kmeans import CustomKMeans
-from scipy.optimize import linear_sum_assignment
 from scipy import stats
 import pdb
 from copy import deepcopy
 from PIL import Image
-from VAAL.train_VAAL import train_VAAL
-from VAAL.model_VAAL import VAE, Discriminator
 import shutil
 import routes
 from scipy.spatial import distance
@@ -39,14 +35,7 @@ from utils import (
     get_patch_clusters_x_class,
     SpatialPurity,
 )
-from kmeans_utils import (
-    get_fixed_clusters,
-    CustomKMeans_simpler,
-    CustomKMedian,
-    cluster_algorithm,
-    cluster_algorithm_patch,
-)
-from datasets.others import DataHandlerBYOL
+
 from create_dataset import get_dataset_variables
 from config import config
 

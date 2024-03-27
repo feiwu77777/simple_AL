@@ -1,11 +1,9 @@
 from routes import (
     FILE_TYPE,
-    CLASS_ID_CUT,
     PRINT_PATH,
 )
 import routes
 from torch.utils.data import DataLoader
-import torch
 import os
 import numpy as np
 import collections
