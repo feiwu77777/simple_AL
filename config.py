@@ -85,12 +85,12 @@ config = {
     
     "NUM_QUERY": 20,
     "NUM_ROUND": 6,
-    "SAMPLING": "CBAL_v2", # "class_entropy_patch_multiClassAL",  # "BvSB_patch_v2", "pixelBal_v2", "revisiting_v2", "CBAL_v2", "class_entropy_ML_pred_patch"
+    "SAMPLING": "random", # "class_entropy_patch_multiClassAL",  # "BvSB_patch_v2", "pixelBal_v2", "revisiting_v2", "CBAL_v2", "class_entropy_ML_pred_patch"
     
     "EXP_NAME": 'ads/v7/AL_sda',
     "SAVE_CONTINUE_ROUND": False,
     
-    "MODEL_ARCH": 'deeplabv3_resnet101', # 'deeplabv3_resnet50', 'deeplabv3_resnet101', 'unet', 'vit'
+    "MODEL_ARCH": 'deeplabv3_resnet50', # 'deeplabv3_resnet50', 'deeplabv3_resnet101', 'unet', 'vit'
     "VIT_BACKBONE": 'vit_small_patch16_384',
     "VIT_DECODER": 'mask_transformer',
     
