@@ -623,8 +623,19 @@ def main():
 
         ### SPLIT TRAIN SET ###
         curr_labeled, curr_selected_patches, train_data, val_data, test_data, TRAIN_SEQ, VAL_SEQ, TEST_SEQ = get_image_curr_labeled(config, SEED)
+
+        ################### define patience iter ###################
+        if config['N_LABEL'] > 1 and config['DATASET'] not in ['auris', 'intuitive', 'cityscapes', 'pascal_VOC'] and not config['BALANCED_INIT']:                                                 
+            config['PATIENCE_ITER'] = 2 * (config['INIT_NUM_VIDEO'] + (config['NUM_ROUND'] - 1) * config['NUM_QUERY'])
+        # # elif config['N_LABEL'] > 1 and config['DATASET'] != 'auris' and config['BALANCED_INIT']:
+        #     config['PATIENCE_ITER'] = 2 * ((config['N_LABEL'] - 1) * 2 + (config['NUM_ROUND'] - 1) * config['NUM_QUERY'])
         config["PATIENCE_ITER"] = config["PATIENCE_ITER"] // config["BATCH_SIZE"]
 
+        if config['DATASET'] == 'auris': # auris v11
+            auris_patience_iter = [132, 90, 130, 130, 130, 127, 142, 113, 113, 113]
+            config['PATIENCE_ITER'] = auris_patience_iter[SEED]
+        ##################### 
+            
         start_round = 0
         test_scores = []
 
