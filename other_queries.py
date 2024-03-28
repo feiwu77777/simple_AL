@@ -13,22 +13,22 @@ from PIL import Image
 import shutil
 import routes
 from scipy.spatial import distance
-from utils import is_adjacent, find_elbow
+#from utils import is_adjacent, find_elbow
 
 
 from routes import FILE_TYPE, CLASS_ID_CUT, PRINT_PATH, IGNORE_INDEX
 from utils import (
-    embedding_similarity,
+#    embedding_similarity,
     euc_distance,
     resnet_embedding,
     simCLR_embedding,
     center_diff,
     average_center,
-    simCLR_projection_embedding,
-    BYOL_embedding,
+#    simCLR_projection_embedding,
+#    BYOL_embedding,
     representativeness,
     balance_classes,
-    balance_pixels,
+#    balance_pixels,
     get_clusters_x_class,
     get_clusters_x_class_video,
     get_videos_x_class,

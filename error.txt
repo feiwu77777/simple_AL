@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/storage/homefs/sw21c033/AL/simple_AL/main.py", line 957, in <module>
+    main()
+  File "/storage/homefs/sw21c033/AL/simple_AL/main.py", line 625, in main
+    curr_labeled, curr_selected_patches, train_data, val_data, test_data, TRAIN_SEQ, VAL_SEQ, TEST_SEQ = get_image_curr_labeled(config, SEED)
+  File "/storage/homefs/sw21c033/AL/simple_AL/create_dataset.py", line 456, in get_image_curr_labeled
+    curr_labeled, curr_selected_patches = init_image_patch_labeled_set(TRAIN_SEQ, config['PATCH_NUMBER'], nb_labeled=nb_labeled, frame_keyword=frame_keyword)
+  File "/storage/homefs/sw21c033/AL/simple_AL/create_dataset.py", line 87, in init_image_patch_labeled_set
+    for patch_nb in range(patch_number):
+TypeError: 'NoneType' object cannot be interpreted as an integer

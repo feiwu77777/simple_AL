@@ -61,7 +61,8 @@ dataset_pretrained_paths = {
 }
 
 config = {
-    "DATASET": "auris", 
+    "DATASET": "cityscapes", 
+    "LEARNING_RATE": 1e-4,
     "MAX_PATIENCE": 10,
     "DEVICE": "cuda" if torch.cuda.is_available() else "cpu",
     "BATCH_SIZE": 4,
@@ -75,7 +76,7 @@ config = {
     "CONTINUE_TRAIN": False,
     "IMG_PER_CLASS": 1, 
     
-    "PATCH_NUMBER": 36, 
+    "PATCH_NUMBER": None, 
     "PATCH_SHAPE": "superpixel",
     "DOMINANT_LABELLING": True,
     
