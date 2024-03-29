@@ -77,33 +77,3 @@ class FocalLoss(nn.Module):
         pt = torch.exp(-ce_loss)
         focal_loss = self.alpha * (1-pt)**self.gamma * ce_loss
         return focal_loss.mean()
-
-
-    r'''
-    Usage:
-        tta = TestTimeAugmentation()
-        image = Image.open('path/to/your/image.jpg')
-        augmented_images = tta(image)
-    '''
-
-    def __init__(self):
-        self.rescale_factors = [0.5, 0.75, 1.0, 1.25, 1.5]
-
-    def __call__(self, image):
-        original_width, original_height = image.size
-        augmented_images = []
-
-        for flip in [False, True]:
-            for factor in self.rescale_factors:
-                transform = transforms.Compose([
-                    transforms.Resize((int(factor * original_height), int(factor * original_width))),
-                    transforms.RandomHorizontalFlip(p=1.0) if flip else transforms.Lambda(lambda x: x),
-                    transforms.ToTensor(),
-                    # transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                    #                      std=[0.229, 0.224, 0.225]),
-                ])
-
-                augmented_image = transform(image)
-                augmented_images.append(augmented_image)
-
-        return augmented_images
